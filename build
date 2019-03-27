@@ -1,0 +1,6 @@
+echo "Running yacc..."
+./yacc -d -J cminus.y
+echo "Running JFlex..."
+jflex -q cminus.flex
+echo "Running javac..."
+javac ParseMain.java Parser.java Yylex.java

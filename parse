@@ -1,0 +1,10 @@
+#!/bin/bash
+# Script to parse a Cminus program
+# Usage: ./parse program.c
+
+cprogram=$1
+
+echo ==================== $cprogram ====================
+echo Parse C- program $cprogram
+java ParseMain $cprogram
+

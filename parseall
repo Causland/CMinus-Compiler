@@ -1,0 +1,11 @@
+#!/bin/bash
+# Script to parse all Cminus programs
+# Usage: ./parseall
+testdir=test
+
+for file in "$testdir"/*;
+do
+  parse $file
+done
+
+
