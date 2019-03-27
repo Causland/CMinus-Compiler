@@ -48,108 +48,108 @@ type_specifier:		INT { $$ = $1; }
 fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt
 			;
 
-params:			param_list { $$ = $1; }
-				| VOID
-				| EMPTY
+params:				param_list { $$ = $1; }
+					| VOID
+					| EMPTY
 			;
 
-param_list:		param_list COMMA param
-				| param
+param_list:			param_list COMMA param
+					| param
 			;
 
-param:			type_specifier ID
-				| type_specifier ID LBRACKET RBRACKET
+param:				type_specifier ID
+					| type_specifier ID LBRACKET RBRACKET
 			;
 
-compound_stmt:	LBRACKET local_declartions statement_list RBRACKET
+compound_stmt:		LBRACKET local_declartions statement_list RBRACKET
 			;
 
 local_declarations:	local_declarations var_declaration
-				| EMPTY
+					| EMPTY
 			;
 
-statement_list:	statement_list statement
-				| EMPTY	
+statement_list:		statement_list statement
+					| EMPTY	
 			;
 
-statement:		assign_stmt
-				| compound_stmt
-				| selection_stmt
-				| iteration_stmt
-				| return_stmt
-				| print_stmt
-				| input_stmt
-				| call_stmt
-				| SEMI
+statement:			assign_stmt
+					| compound_stmt
+					| selection_stmt
+					| iteration_stmt
+					| return_stmt
+					| print_stmt
+					| input_stmt
+					| call_stmt
+					| SEMI
 			;
 
-call_stmt:  	call SEMI
+call_stmt:  		call SEMI
 			;
 
-assign_stmt:	ID ASSIGN expression SEMI
-				| ID LBRACKET expression RBRACKET ASSIGN expression SEMI
+assign_stmt:		ID ASSIGN expression SEMI
+					| ID LBRACKET expression RBRACKET ASSIGN expression SEMI
 			;
 
-selection_stmt:	IF LPAREN expression RPAREN statement ELSE statement
+selection_stmt:		IF LPAREN expression RPAREN statement ELSE statement
 			;
 
-iteration_stmt:	WHILE LPAREN expression RPAREN statement
+iteration_stmt:		WHILE LPAREN expression RPAREN statement
 			;
 
-print_stmt:		PRINT LPAREN expression RPAREN SEMI
+print_stmt:			PRINT LPAREN expression RPAREN SEMI
 			;
 
-input_stmt:		ID ASSIGN INPUT LPAREN RPAREN SEMI
+input_stmt:			ID ASSIGN INPUT LPAREN RPAREN SEMI
 			;
 
-return_stmt:	RETURN SEMI
-				| RETURN expression SEMI
+return_stmt:		RETURN SEMI
+					| RETURN expression SEMI
 			;
 
-expression:	  additive_expression relop additive_expression
-				| additive_expression
+expression:	  		additive_expression relop additive_expression
+					| additive_expression
 			;
 
-relop:			LTE
-				| LT
-				| GT
-				| GTE
-				| EQ
-				| NOT
+relop:				LTE
+					| LT
+					| GT
+					| GTE
+					| EQ
+					| NOT
 			;
 
 additive_expression:	additive_expression addop term
 						| term
 			;
 
-addop:			PLUS
-				| MINUS
+addop:				PLUS
+					| MINUS
 			;
 
-term:			term mulop factor
-				| factor
+term:				term mulop factor
+					| factor
 			;
 
-mulop:			MULT
-				| DIVIDE
+mulop:				MULT
+					| DIVIDE
 			;
 
-factor:			LPAREN expression RPAREN
-				| ID
-				| ID LBRACKET expression RBRACKET
-				| call
-				| NUM
+factor:				LPAREN expression RPAREN
+					| ID
+					| ID LBRACKET expression RBRACKET
+					| call
+					| NUM
 			;
 
-call:			ID LPAREN args RPAREN
+call:				ID LPAREN args RPAREN
 			;
 
-args:			arg_list
-				| EMPTY
+args:				arg_list
+					| EMPTY
 			;
 
-arg_list:		arg_list COMMA expression
-				| expression
+arg_list:			arg_list COMMA expression
+					| expression
 			;
 
 %%
