@@ -28,7 +28,7 @@ public class Parser
              implements ParserTokens
 {
 
-boolean yydebug;        //do I want debug output?
+boolean yydeb;        //do I want debug output?
 int yynerrs;            //number of errors so far
 int yyerrflag;          //was there an error?
 int yychar;             //the current working character
