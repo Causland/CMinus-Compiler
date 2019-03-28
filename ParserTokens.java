@@ -31,5 +31,4 @@ public final static short INT=285;
 public final static short IF=286;
 public final static short ELSE=287;
 public final static short ERROR=288;
-public final static short NOT=289;
 }

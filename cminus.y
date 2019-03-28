@@ -115,7 +115,7 @@ relop:				LTE
 					| GT
 					| GTE
 					| EQ
-					| NOT
+					| NOTEQ
 			;
 
 additive_expression:	additive_expression addop term

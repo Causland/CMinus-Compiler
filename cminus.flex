@@ -56,6 +56,15 @@ ws     = {eol} | [ \t\f]
 comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 
 %%
+"else"			{return Parser.ELSE;}
+"if"			{return Parser.IF;}
+"int" 			{return Parser.INT;}
+"return"		{return Parser.RETURN;}
+"void"			{return Parser.VOID;}
+"while"			{return Parser.WHILE;}
+"print"			{return Parser.PRINT;}
+"input"			{return Parser.INPUT;}
+
 
 {letter}({letter}|{digit})*	{
 								yyparser.yylval = new ParserVal(yytext());
@@ -73,7 +82,7 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "="				{return Parser.ASSIGN;}
 
 "("				{return Parser.LPAREN;}
-")"				{return Parser.RAREN;}
+")"				{return Parser.RPAREN;}
 "{"				{return Parser.LCBRACKET;}
 "}"				{return Parser.RCBRACKET;}
 "["				{return Parser.LBRACKET;}
@@ -88,16 +97,6 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 ">="			{return Parser.GTE;}
 "<"				{return Parser.LT;}
 ">"				{return Parser.GT;}
-
-"else"			{return Parser.ELSE;}
-"if"			{return Parser.IF;}
-"int" 			{return Parser.INT;}
-"return"		{return Parser.RETURN;}
-"void"			{return Parser.VOID;}
-"while"			{return Parser.WHILE;}
-"print"			{return Parser.PRINT;}
-"input"			{return Parser.INPUT;}
-
 
 {ws}			{/* ignore */}
 {comment}       {/* ignore */}
