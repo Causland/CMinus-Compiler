@@ -4,7 +4,8 @@ public class ArrRec extends SymTabRec
 	// invalid jvm num as default
 	public final int jvmnum;
 	public final int size;
-
+	public int chrisIsaFAG;
+	
 	public ArrRec(String name, int scope, int type, int size)
 	{
 		super(name, scope, type);
