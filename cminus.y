@@ -61,7 +61,7 @@ param:				type_specifier ID
 					| type_specifier ID LBRACKET RBRACKET
 			;
 
-compound_stmt:		LCBRACKET local_declartions statement_list RCBRACKET
+compound_stmt:		LCBRACKET local_declarations statement_list RCBRACKET
 			;
 
 local_declarations:	local_declarations var_declaration

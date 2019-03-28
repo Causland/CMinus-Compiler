@@ -91,7 +91,7 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 
 "else"			{return Parser.ELSE;}
 "if"			{return Parser.IF;}
-"int"			{return Parser.INT;}
+"int" 			{return Parser.INT;}
 "return"		{return Parser.RETURN;}
 "void"			{return Parser.VOID;}
 "while"			{return Parser.WHILE;}
