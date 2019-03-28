@@ -7,9 +7,9 @@ import java.io.*;
 import java.util.*;
 %}
   
-%token ID NUM EMPTY
+%token ID NUM
 %token PLUS MINUS MULT DIVIDE LT GT LTE GTE EQ NOTEQ
-%token SEMI COMMA ASSIGN LPAREN RPAREN LBRACKET RBRACKET LCOMMENT RCOMMENT
+%token SEMI COMMA ASSIGN LPAREN RPAREN LBRACKET RBRACKET LCBRACKET RCBRACKET LCOMMENT RCOMMENT
 %token PRINT INPUT WHILE VOID RETURN INT IF ELSE
 %token ERROR
 
@@ -38,7 +38,7 @@ declaration:		var_declaration
 			;
 
 var_declaration:	type_specifier ID SEMI
-				|	type_specifier ID [ NUM ] SEMI
+				|	type_specifier ID LBRACKET NUM RBRACKET SEMI
 			;
 
 type_specifier:		INT { $$ = $1; }
@@ -50,7 +50,7 @@ fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt
 
 params:				param_list { $$ = $1; }
 					| VOID
-					| EMPTY
+					| 
 			;
 
 param_list:			param_list COMMA param
@@ -61,15 +61,15 @@ param:				type_specifier ID
 					| type_specifier ID LBRACKET RBRACKET
 			;
 
-compound_stmt:		LBRACKET local_declartions statement_list RBRACKET
+compound_stmt:		LCBRACKET local_declartions statement_list RCBRACKET
 			;
 
 local_declarations:	local_declarations var_declaration
-					| EMPTY
+					| 
 			;
 
 statement_list:		statement_list statement
-					| EMPTY	
+					| 	
 			;
 
 statement:			assign_stmt
@@ -145,7 +145,7 @@ call:				ID LPAREN args RPAREN
 			;
 
 args:				arg_list
-					| EMPTY
+					| 
 			;
 
 arg_list:			arg_list COMMA expression

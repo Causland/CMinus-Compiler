@@ -57,8 +57,6 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 
 %%
 
-print			{return Parser.PRINT; }
-
 {letter}({letter}|{digit})*	{
 								yyparser.yylval = new ParserVal(yytext());
 								return Parser.ID;
@@ -69,8 +67,36 @@ print			{return Parser.PRINT; }
 								return Parser.NUM;
 							}
 "+"				{yyparser.yylval = new ParserVal(Parser.PLUS); return Parser.PLUS;}
-
+"-"				{return Parser.MINUS;}
+"*"				{return Parser.MULT;}
+"/"				{return Parser.DIVIDE;}
 "="				{return Parser.ASSIGN;}
+
+"("				{return Parser.LPAREN;}
+")"				{return Parser.RAREN;}
+"{"				{return Parser.LCBRACKET;}
+"}"				{return Parser.RCBRACKET;}
+"["				{return Parser.LBRACKET;}
+"]"				{return Parser.RBRACKET;}
+
+";"				{return Parser.SEMI;}
+","				{return Parser.COMMA;}
+
+"=="			{return Parser.EQ;}
+"!="			{return Parser.NOTEQ;}
+"<="			{return Parser.LTE;}
+">="			{return Parser.GTE;}
+"<"				{return Parser.LT;}
+">"				{return Parser.GT;}
+
+"else"			{return Parser.ELSE;}
+"if"			{return Parser.IF;}
+"int"			{return Parser.INT;}
+"return"		{return Parser.RETURN;}
+"void"			{return Parser.VOID;}
+"while"			{return Parser.WHILE;}
+"print"			{return Parser.PRINT;}
+"input"			{return Parser.INPUT;}
 
 
 {ws}			{/* ignore */}
