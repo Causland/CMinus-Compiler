@@ -46,8 +46,8 @@ class Yylex {
    */
   private static final String ZZ_CMAP_PACKED = 
     "\11\0\1\5\1\4\1\45\1\5\1\3\22\0\1\5\1\42\6\0"+
-    "\1\32\1\33\1\7\1\27\1\41\1\30\1\0\1\6\12\2\1\0"+
-    "\1\40\1\43\1\31\1\44\2\0\32\1\1\36\1\0\1\37\3\0"+
+    "\1\32\1\33\1\7\1\27\1\40\1\30\1\0\1\6\12\2\1\0"+
+    "\1\41\1\43\1\31\1\44\2\0\32\1\1\36\1\0\1\37\3\0"+
     "\3\1\1\23\1\10\1\14\1\1\1\25\1\13\2\1\1\11\1\1"+
     "\1\15\1\22\1\26\1\1\1\17\1\12\1\16\1\20\1\21\1\24"+
     "\3\1\1\34\1\0\1\35\7\0\1\45\u1fa2\0\1\45\1\45\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
@@ -767,12 +767,12 @@ public int value;
             // fall through
           case 46: break;
           case 16: 
-            { return Parser.SEMI;
+            { return Parser.COMMA;
             } 
             // fall through
           case 47: break;
           case 17: 
-            { return Parser.COMMA;
+            { return Parser.SEMI;
             } 
             // fall through
           case 48: break;

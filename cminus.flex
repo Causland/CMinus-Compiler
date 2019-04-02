@@ -65,7 +65,6 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "print"			{return Parser.PRINT;}
 "input"			{return Parser.INPUT;}
 
-
 {letter}({letter}|{digit})*	{
 								yyparser.yylval = new ParserVal(yytext());
 								return Parser.ID;
@@ -88,8 +87,8 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 "["				{return Parser.LBRACKET;}
 "]"				{return Parser.RBRACKET;}
 
-";"				{return Parser.SEMI;}
 ","				{return Parser.COMMA;}
+";"				{return Parser.SEMI;}
 
 "=="			{return Parser.EQ;}
 "!="			{return Parser.NOTEQ;}
