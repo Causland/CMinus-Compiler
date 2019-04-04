@@ -812,7 +812,8 @@ public int value;
             // fall through
           case 55: break;
           case 25: 
-            { return Parser.INT;
+            { yyparser.yylval = new ParserVal(value);
+					return Parser.INT;
             } 
             // fall through
           case 56: break;
@@ -822,7 +823,8 @@ public int value;
             // fall through
           case 57: break;
           case 27: 
-            { return Parser.VOID;
+            { yyparser.yylval = new ParserVal(yytext());
+					return Parser.VOID;
             } 
             // fall through
           case 58: break;

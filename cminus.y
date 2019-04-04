@@ -16,15 +16,15 @@ import java.util.*;
 %%
 
 program:		{ 
-					// TODO enter scope in symbol table
 					// TODO generate code prologue
+					symtab.enterScope();
                 } 
                 declaration_list 
                 {
                 	if (usesRead) GenCode.genReadMethod();
                 	// TODO generate class constructor code
                 	// TODO generate epilog
-                	// TODO exit symbol table scope
+                	symtab.exitScope();
                 	if (!seenMain) semerror("No main in file"); 
 				}
 			;
@@ -37,12 +37,20 @@ declaration:		var_declaration
 				|	fun_declaration
 			;
 
-var_declaration:	type_specifier ID SEMI
+var_declaration:	type_specifier ID SEMI {
+						int vartype = $1.ival;
+						String name = $2.sval;
+						int scope = symtab.getScope();
+
+						//Symbol table add
+						SymTabRec rec = new VarRec(name, scope, vartype);
+						symtab.insert(name, rec); 
+					}
 				|	type_specifier ID LBRACKET NUM RBRACKET SEMI
 			;
 
 type_specifier:		INT { $$ = $1; }
-				|	VOID
+				|	VOID { $$ = $1; }
 			;
 
 fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt

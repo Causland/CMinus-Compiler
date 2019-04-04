@@ -373,7 +373,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 156 "cminus.y"
+//#line 164 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -594,8 +594,8 @@ boolean doaction;
 case 1:
 //#line 18 "cminus.y"
 { 
-					/* TODO enter scope in symbol table*/
 					/* TODO generate code prologue*/
+					symtab.enterScope();
                 }
 break;
 case 2:
@@ -604,19 +604,35 @@ case 2:
                 	if (usesRead) GenCode.genReadMethod();
                 	/* TODO generate class constructor code*/
                 	/* TODO generate epilog*/
-                	/* TODO exit symbol table scope*/
+                	symtab.exitScope();
                 	if (!seenMain) semerror("No main in file"); 
 				}
 break;
+case 7:
+//#line 40 "cminus.y"
+{
+						int vartype = val_peek(2).ival;
+						String name = val_peek(1).sval;
+						int scope = symtab.getScope();
+
+						/*Symbol table add*/
+						SymTabRec rec = new VarRec(name, scope, vartype);
+						symtab.insert(name, rec); 
+					}
+break;
 case 9:
-//#line 44 "cminus.y"
+//#line 52 "cminus.y"
+{ yyval = val_peek(0); }
+break;
+case 10:
+//#line 53 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 12:
-//#line 51 "cminus.y"
+//#line 59 "cminus.y"
 { yyval = val_peek(0); }
 break;
-//#line 574 "Parser.java"
+//#line 590 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

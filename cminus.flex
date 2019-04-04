@@ -58,9 +58,15 @@ comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 %%
 "else"			{return Parser.ELSE;}
 "if"			{return Parser.IF;}
-"int" 			{return Parser.INT;}
+"int" 			{
+					yyparser.yylval = new ParserVal(yytext());
+					return Parser.INT;
+				}
 "return"		{return Parser.RETURN;}
-"void"			{return Parser.VOID;}
+"void"			{
+					yyparser.yylval = new ParserVal(yytext());
+					return Parser.VOID;
+				}
 "while"			{return Parser.WHILE;}
 "print"			{return Parser.PRINT;}
 "input"			{return Parser.INPUT;}
