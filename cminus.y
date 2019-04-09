@@ -16,8 +16,8 @@ import java.util.*;
 %%
 
 program:		{ 
-					// TODO generate code prologue
 					symtab.enterScope();
+					// TODO generate code prologue
                 } 
                 declaration_list 
                 {

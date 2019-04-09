@@ -812,7 +812,7 @@ public int value;
             // fall through
           case 55: break;
           case 25: 
-            { yyparser.yylval = new ParserVal(value);
+            { yyparser.yylval = new ParserVal(yytext());
 					return Parser.INT;
             } 
             // fall through
