@@ -42,34 +42,110 @@ var_declaration:	type_specifier ID SEMI {
 						String name = $2.sval;
 						int scope = symtab.getScope();
 
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of variable " + name + " in the current scope");
+						}
+						else
+						{
 						//Symbol table add
 						SymTabRec rec = new VarRec(name, scope, vartype);
 						symtab.insert(name, rec); 
+						}
 					}
-				|	type_specifier ID LBRACKET NUM RBRACKET SEMI
+				|	type_specifier ID LBRACKET NUM RBRACKET SEMI 
+					{
+						int vartype = $1.ival;
+						String name = $2.sval;
+						int scope = symtab.getScope();
+						int arrayLength = $4.ival;
+
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of array " + name + " in the current scope");
+						}
+						else
+						{
+						//Symbol table add
+						SymTabRec rec = new ArrRec(name, scope, vartype,arrayLength);
+						symtab.insert(name, rec); 
+						}
+					}
 			;
 
 type_specifier:		INT { $$ = $1; }
 				|	VOID { $$ = $1; }
 			;
 
-fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt
+fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt 
+					{
+						
+
+						int funtype = $1.ival;
+						String name = $2.sval;
+						int scope = symtab.getScope();
+
+						//List<SymTabRec> params = $4.ival;
+
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of function " + name + " in the current scope");
+						}
+						else
+						{
+							List<SymTabRec> params = (List<SymTabRec>)$4.obj;
+							FunRec rec = new FunRec(name, scope, funtype, null);
+							symtab.insert(name,rec);
+						}
+					}
 			;
 
 params:				param_list { $$ = $1; }
-					| VOID
-					| 
+					| VOID { $$ = new ParserVal(null); }
+					| { $$ = new ParserVal(null); }
 			;
 
 param_list:			param_list COMMA param
+					{
+						//List<SymTabRec> param_list = $1;
+
+					}
 					| param
+					{
+						List<SymTabRec> param_list =  new ArrayList<SymTabRec>();
+						param_list.add((SymTabRec)$1.obj);
+						$$ = new ParserVal(param_list);
+					}
 			;
 
 param:				type_specifier ID
+					{
+						int vartype = $1.ival;
+						String name = $2.sval;
+						int scope = symtab.getScope();
+						VarRec rec = new VarRec(name,scope,vartype);
+						$$ = new ParserVal(rec);
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of param "+ name + " in the current scope");
+						}
+						else
+						{
+							symtab.insert(name,rec);
+						}
+					}
 					| type_specifier ID LBRACKET RBRACKET
 			;
 
-compound_stmt:		LCBRACKET local_declarations statement_list RCBRACKET
+compound_stmt:		{
+						symtab.enterScope();
+					}
+					LCBRACKET 
+					local_declarations statement_list RCBRACKET
+					{
+						symtab.exitScope();
+					}
+
 			;
 
 local_declarations:	local_declarations var_declaration

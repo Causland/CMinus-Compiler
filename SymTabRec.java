@@ -6,7 +6,7 @@ public abstract class SymTabRec
 
 	// type of var, base type of arr, ret type of fun
 	public final int type;
-
+	
 	// for keeping track of JVM num
 	private static int nextNum;
 
@@ -15,6 +15,7 @@ public abstract class SymTabRec
 		this.name = name;
 		this.scope = scope;
 		this.type = type;
+		
 	}
 
 	protected static int getJVMNum()
