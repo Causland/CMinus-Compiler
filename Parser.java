@@ -381,7 +381,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 285 "cminus.y"
+//#line 287 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -619,8 +619,8 @@ break;
 case 7:
 //#line 40 "cminus.y"
 {
-						int vartype = val_peek(2).ival;
 
+						int vartype = val_peek(2).ival;
 						String name = val_peek(1).sval;
 						int scope = symtab.getScope();
 
@@ -657,7 +657,7 @@ case 8:
 						else
 						{
 						/*Symbol table add*/
-						SymTabRec rec = new ArrRec(name, scope, vartype,arrayLength);
+						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
 						symtab.insert(name, rec); 
 						}
 					}
@@ -746,20 +746,22 @@ break;
 case 17:
 //#line 150 "cminus.y"
 {
-						/*List<SymTabRec> param_list = $1;*/
+						List<SymTabRec> params = (List<SymTabRec>)val_peek(2).obj;
+						params.add((SymTabRec)val_peek(0).obj);
+						yyval = new ParserVal(params);
 
 					}
 break;
 case 18:
-//#line 155 "cminus.y"
+//#line 157 "cminus.y"
 {
-						List<SymTabRec> param_list =  new ArrayList<SymTabRec>();
-						param_list.add((SymTabRec)val_peek(0).obj);
-						yyval = new ParserVal(param_list);
+						List<SymTabRec> params =  new ArrayList<SymTabRec>();
+						params.add((SymTabRec)val_peek(0).obj);
+						yyval = new ParserVal(params);
 					}
 break;
 case 19:
-//#line 163 "cminus.y"
+//#line 165 "cminus.y"
 {
 						int vartype = val_peek(1).ival;
 						String name = val_peek(0).sval;
@@ -777,7 +779,7 @@ case 19:
 					}
 break;
 case 21:
-//#line 181 "cminus.y"
+//#line 183 "cminus.y"
 {
 						if(firstTime){
 							firstTime = false;
@@ -788,12 +790,12 @@ case 21:
 					}
 break;
 case 22:
-//#line 190 "cminus.y"
+//#line 192 "cminus.y"
 {
 						symtab.exitScope();
 					}
 break;
-//#line 751 "Parser.java"
+//#line 753 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
