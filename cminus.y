@@ -38,6 +38,7 @@ declaration:		var_declaration
 			;
 
 var_declaration:	type_specifier ID SEMI {
+
 						int vartype = $1.ival;
 						String name = $2.sval;
 						int scope = symtab.getScope();
@@ -45,6 +46,9 @@ var_declaration:	type_specifier ID SEMI {
 						if (symtab.lookup(name))
 						{
 							semerror("Redeclaration of variable " + name + " in the current scope");
+						}
+						else if(vartype == VOID){
+							semerror("Variable " + name + " cannot be of type void");
 						}
 						else
 						{
@@ -64,10 +68,13 @@ var_declaration:	type_specifier ID SEMI {
 						{
 							semerror("Redeclaration of array " + name + " in the current scope");
 						}
+						else if(vartype == VOID){
+							semerror("Array " + name + " cannot be of type void");
+						}
 						else
 						{
 						//Symbol table add
-						SymTabRec rec = new ArrRec(name, scope, vartype,arrayLength);
+						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
 						symtab.insert(name, rec); 
 						}
 					}
@@ -77,7 +84,7 @@ type_specifier:		INT { $$ = $1; }
 				|	VOID { $$ = $1; }
 			;
 
-fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt 
+fun_declaration: 	type_specifier ID  
 					{
 						
 
@@ -87,16 +94,50 @@ fun_declaration: 	type_specifier ID LPAREN params RPAREN compound_stmt
 
 						//List<SymTabRec> params = $4.ival;
 
+						// Create a symbol table record
+						FunRec rec = new FunRec(name, scope, funtype, null);
+						$$ = new ParserVal(rec);
+
 						if (symtab.lookup(name))
 						{
 							semerror("Redeclaration of function " + name + " in the current scope");
 						}
-						else
-						{
-							List<SymTabRec> params = (List<SymTabRec>)$4.obj;
-							FunRec rec = new FunRec(name, scope, funtype, null);
+						else if (!seenMain){
+							// Insert record into symbol table
 							symtab.insert(name,rec);
+
+							if(name.equals("main")){
+								seenMain = true;
+							}
 						}
+						else{
+							semerror("Function " + name + " cannot be declared after main");
+						}
+					}
+					LPAREN params RPAREN
+					{
+						symtab.enterScope();
+
+						int funtype = $1.ival;
+						String name = $2.sval;
+
+						// Get params from $5
+						List<SymTabRec> params = (List<SymTabRec>)$5.obj;
+						((FunRec)($3.obj)).setParams(params);
+
+						if(name.equals("main")){
+							if(funtype != VOID){
+								semerror("Return type of main function must be void");
+							}
+							if($5.obj != null){
+								semerror("Parameters of main function must be void or empty");
+							}
+						}
+
+					}
+					compound_stmt
+					{
+						firstTime = true;
 					}
 			;
 
@@ -107,14 +148,16 @@ params:				param_list { $$ = $1; }
 
 param_list:			param_list COMMA param
 					{
-						//List<SymTabRec> param_list = $1;
+						List<SymTabRec> params = (List<SymTabRec>)$1.obj;
+						params.add((SymTabRec)$3.obj);
+						$$ = new ParserVal(params);
 
 					}
 					| param
 					{
-						List<SymTabRec> param_list =  new ArrayList<SymTabRec>();
-						param_list.add((SymTabRec)$1.obj);
-						$$ = new ParserVal(param_list);
+						List<SymTabRec> params =  new ArrayList<SymTabRec>();
+						params.add((SymTabRec)$1.obj);
+						$$ = new ParserVal(params);
 					}
 			;
 
@@ -138,10 +181,14 @@ param:				type_specifier ID
 			;
 
 compound_stmt:		{
-						symtab.enterScope();
+						if(firstTime){
+							firstTime = false;
+						}
+						else{
+							symtab.enterScope();
+						}
 					}
-					LCBRACKET 
-					local_declarations statement_list RCBRACKET
+					LCBRACKET local_declarations statement_list RCBRACKET
 					{
 						symtab.exitScope();
 					}
@@ -248,7 +295,7 @@ public final SymTab<SymTabRec> symtab = new SymTab<SymTabRec>();
 private boolean seenMain = false;
 
 /* To take care of nuance associated with params and decls in compound stsmt */
-private boolean firstTime = true;
+private boolean firstTime = false;
 
 /* To gen boilerplate code for read only if input was encountered  */
 private boolean usesRead = false;
