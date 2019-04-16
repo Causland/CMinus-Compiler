@@ -178,6 +178,21 @@ param:				type_specifier ID
 						}
 					}
 					| type_specifier ID LBRACKET RBRACKET
+					{
+						int vartype = $1.ival;
+						String name = $2.sval;
+						int scope = symtab.getScope();
+						SymTabRec rec = new ArrRec(name,scope,vartype,-1);
+						$$ = new ParserVal(rec);
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of param array "+ name + " in the current scope");
+						}
+						else
+						{
+							symtab.insert(name,rec);
+						}
+					}
 			;
 
 compound_stmt:		{
@@ -218,7 +233,32 @@ call_stmt:  		call SEMI
 			;
 
 assign_stmt:		ID ASSIGN expression SEMI
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared variable" + name + "in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a variable in the current scope");
+						}
+
+					}
 					| ID LBRACKET expression RBRACKET ASSIGN expression SEMI
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared array" + name + "in the current scope");
+						}
+						else if(!rec.isArr())
+						{
+							semerror("Name " + name + " is not an array in the current scope");
+						}
+					}
 			;
 
 selection_stmt:		IF LPAREN expression RPAREN statement ELSE statement
@@ -231,6 +271,22 @@ print_stmt:			PRINT LPAREN expression RPAREN SEMI
 			;
 
 input_stmt:			ID ASSIGN INPUT LPAREN RPAREN SEMI
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared variable" + name + " in input statement in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a variable in the input statement in the current scope");
+						}
+						else
+						{
+							usesRead = true;
+						}
+					}
 			;
 
 return_stmt:		RETURN SEMI
@@ -267,12 +323,48 @@ mulop:				MULT
 
 factor:				LPAREN expression RPAREN
 					| ID
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared factor variable " + name + "in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a factor variable in the current scope");
+						}
+					}
 					| ID LBRACKET expression RBRACKET
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared factor array" + name + "in the current scope");
+						}
+						else if(!rec.isArr())
+						{
+							semerror("Name " + name + " is not a factor array in the current scope");
+						}
+					}
 					| call
 					| NUM
 			;
 
 call:				ID LPAREN args RPAREN
+					{
+						String name = $1.sval;
+						SymTabRec rec  symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared function" + name + "in the current scope");
+						}
+						else if(!rec.isFun())
+						{
+							semerror("Name " + name + " is not a function in the current scope");
+						}
+					}
 			;
 
 args:				arg_list
