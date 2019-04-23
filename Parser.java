@@ -381,7 +381,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 382 "cminus.y"
+//#line 391 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -424,9 +424,11 @@ public void yyerror (String error)
 /* For semantic errors */
 public void semerror (String error)
 {
-    System.err.println("Semantic Error : " + error + " at line " + 
-		lexer.getLine() + " column " + 
-		lexer.getCol());
+	if (ParseMain.SYMBOL_TABLE_OUTPUT){
+    	System.err.println("Semantic Error : " + error + " at line " + 
+			lexer.getLine() + " column " + 
+			lexer.getCol());
+		}
 }
 
 /* constructor taking in File Input */
@@ -445,7 +447,7 @@ public static void main (String [] args) throws IOException
 
 */
 
-//#line 408 "Parser.java"
+//#line 410 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -603,15 +605,15 @@ case 1:
 //#line 18 "cminus.y"
 { 
 					symtab.enterScope();
-					/* TODO generate code prologue*/
+					GenCode.genPrologue();
                 }
 break;
 case 2:
 //#line 23 "cminus.y"
 {
                 	if (usesRead) GenCode.genReadMethod();
-                	/* TODO generate class constructor code*/
-                	/* TODO generate epilog*/
+                	GenCode.genClassConstructor();
+                	GenCode.genEpilogue(symtab);
                 	symtab.exitScope();
                 	if (!seenMain) semerror("No main in file"); 
 				}
@@ -635,12 +637,15 @@ case 7:
 						{
 						/*Symbol table add*/
 						SymTabRec rec = new VarRec(name, scope, vartype);
-						symtab.insert(name, rec); 
+						symtab.insert(name, rec);
+
+						if (scope == 0)
+							GenCode.genStaticDecl(rec); 
 						}
 					}
 break;
 case 8:
-//#line 61 "cminus.y"
+//#line 64 "cminus.y"
 {
 						int vartype = val_peek(5).ival;
 						String name = val_peek(4).sval;
@@ -663,15 +668,15 @@ case 8:
 					}
 break;
 case 9:
-//#line 83 "cminus.y"
+//#line 86 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 10:
-//#line 84 "cminus.y"
+//#line 87 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 11:
-//#line 88 "cminus.y"
+//#line 91 "cminus.y"
 {
 						
 
@@ -703,7 +708,7 @@ case 11:
 					}
 break;
 case 12:
-//#line 118 "cminus.y"
+//#line 121 "cminus.y"
 {
 						symtab.enterScope();
 
@@ -712,7 +717,9 @@ case 12:
 
 						/* Get params from $5*/
 						List<SymTabRec> params = (List<SymTabRec>)val_peek(1).obj;
-						((FunRec)(val_peek(3).obj)).setParams(params);
+						FunRec rec = ((FunRec)(val_peek(3).obj));
+						rec.setParams(params);
+						
 
 						if(name.equals("main")){
 							if(funtype != VOID){
@@ -723,28 +730,31 @@ case 12:
 							}
 						}
 
+						GenCode.genFunBegin(rec);
+
 					}
 break;
 case 13:
-//#line 139 "cminus.y"
+//#line 146 "cminus.y"
 {
 						firstTime = true;
+						GenCode.genFunEnd();
 					}
 break;
 case 14:
-//#line 144 "cminus.y"
+//#line 153 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 15:
-//#line 145 "cminus.y"
+//#line 154 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 16:
-//#line 146 "cminus.y"
+//#line 155 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 17:
-//#line 150 "cminus.y"
+//#line 159 "cminus.y"
 {
 						List<SymTabRec> params = (List<SymTabRec>)val_peek(2).obj;
 						params.add((SymTabRec)val_peek(0).obj);
@@ -753,7 +763,7 @@ case 17:
 					}
 break;
 case 18:
-//#line 157 "cminus.y"
+//#line 166 "cminus.y"
 {
 						List<SymTabRec> params =  new ArrayList<SymTabRec>();
 						params.add((SymTabRec)val_peek(0).obj);
@@ -761,7 +771,7 @@ case 18:
 					}
 break;
 case 19:
-//#line 165 "cminus.y"
+//#line 174 "cminus.y"
 {
 						int vartype = val_peek(1).ival;
 						String name = val_peek(0).sval;
@@ -779,7 +789,7 @@ case 19:
 					}
 break;
 case 20:
-//#line 181 "cminus.y"
+//#line 190 "cminus.y"
 {
 						int vartype = val_peek(3).ival;
 						String name = val_peek(2).sval;
@@ -797,7 +807,7 @@ case 20:
 					}
 break;
 case 21:
-//#line 198 "cminus.y"
+//#line 207 "cminus.y"
 {
 						if(firstTime){
 							firstTime = false;
@@ -808,13 +818,13 @@ case 21:
 					}
 break;
 case 22:
-//#line 207 "cminus.y"
+//#line 216 "cminus.y"
 {
 						symtab.exitScope();
 					}
 break;
 case 37:
-//#line 236 "cminus.y"
+//#line 245 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -833,7 +843,7 @@ case 37:
 					}
 break;
 case 38:
-//#line 253 "cminus.y"
+//#line 262 "cminus.y"
 {
 						String name = val_peek(6).sval;
 						SymTabRec rec = symtab.get(name);
@@ -848,7 +858,7 @@ case 38:
 					}
 break;
 case 42:
-//#line 277 "cminus.y"
+//#line 286 "cminus.y"
 {
 						String name = val_peek(5).sval;
 						SymTabRec rec = symtab.get(name);
@@ -867,7 +877,7 @@ case 42:
 					}
 break;
 case 62:
-//#line 329 "cminus.y"
+//#line 338 "cminus.y"
 {
 						String name = val_peek(0).sval;
 						SymTabRec rec = symtab.get(name);
@@ -882,7 +892,7 @@ case 62:
 					}
 break;
 case 63:
-//#line 342 "cminus.y"
+//#line 351 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -897,7 +907,7 @@ case 63:
 					}
 break;
 case 66:
-//#line 359 "cminus.y"
+//#line 368 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -911,7 +921,7 @@ case 66:
 						}
 					}
 break;
-//#line 869 "Parser.java"
+//#line 879 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

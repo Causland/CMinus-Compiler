@@ -31,7 +31,7 @@ public class GenCode implements ParserTokens
 		else
 		{
 			// array
-			type = " "; // TODO type for integer array
+			type = " [I"; // TODO type for integer array
 
 		}
 		outputCode(".field static " + r.name + type);
@@ -100,6 +100,8 @@ public class GenCode implements ParserTokens
 		{
 			// TODO
 			// outputCode for .method for main method
+			outputCode(".method public static main([Ljava/lang/String;)V");
+			outputCode(".throws java/io/IOException");
 			// outputCode for .throws any exceptions thrown by main
 		}
 		else
@@ -117,12 +119,14 @@ public class GenCode implements ParserTokens
 	public static void genFunEnd()
 	{
 		// TODO outputCode for end of function, including return
+		outputCode("return");
 		/*
 		 * always put a return to avoid jumping an illegal instruction if for
 		 * example the else has return e and is the last statement. See gcd1.c
 		 * as an example
 		 */
 		// TODO outputCode for end of .method
+		outputCode(".end method \n");
 	}
 
 	public static void genReturn()
@@ -343,6 +347,10 @@ public class GenCode implements ParserTokens
 	{
 		// TODO outputCode for prologue that starts a Java program
 		// note we have variables available for fileName and className
+		outputCode(".source stdin");
+		outputCode(".class synchronized Main");
+		outputCode(".super java/lang/Object");
+		outputCode("");
 	}
 
 	public static void genEpilogue(SymTab<SymTabRec> st)

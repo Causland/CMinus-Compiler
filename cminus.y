@@ -17,13 +17,13 @@ import java.util.*;
 
 program:		{ 
 					symtab.enterScope();
-					// TODO generate code prologue
+					GenCode.genPrologue();
                 } 
                 declaration_list 
                 {
                 	if (usesRead) GenCode.genReadMethod();
-                	// TODO generate class constructor code
-                	// TODO generate epilog
+                	GenCode.genClassConstructor();
+                	GenCode.genEpilogue(symtab);
                 	symtab.exitScope();
                 	if (!seenMain) semerror("No main in file"); 
 				}
@@ -54,7 +54,10 @@ var_declaration:	type_specifier ID SEMI {
 						{
 						//Symbol table add
 						SymTabRec rec = new VarRec(name, scope, vartype);
-						symtab.insert(name, rec); 
+						symtab.insert(name, rec);
+
+						if (scope == 0)
+							GenCode.genStaticDecl(rec); 
 						}
 					}
 				|	type_specifier ID LBRACKET NUM RBRACKET SEMI 
@@ -123,7 +126,9 @@ fun_declaration: 	type_specifier ID
 
 						// Get params from $5
 						List<SymTabRec> params = (List<SymTabRec>)$5.obj;
-						((FunRec)($3.obj)).setParams(params);
+						FunRec rec = ((FunRec)($3.obj));
+						rec.setParams(params);
+						
 
 						if(name.equals("main")){
 							if(funtype != VOID){
@@ -134,11 +139,15 @@ fun_declaration: 	type_specifier ID
 							}
 						}
 
+						GenCode.genFunBegin(rec);
+
 					}
 					compound_stmt
 					{
 						firstTime = true;
+						GenCode.genFunEnd();
 					}
+					//
 			;
 
 params:				param_list { $$ = $1; }
@@ -421,9 +430,11 @@ public void yyerror (String error)
 /* For semantic errors */
 public void semerror (String error)
 {
-    System.err.println("Semantic Error : " + error + " at line " + 
-		lexer.getLine() + " column " + 
-		lexer.getCol());
+	if (ParseMain.SYMBOL_TABLE_OUTPUT){
+    	System.err.println("Semantic Error : " + error + " at line " + 
+			lexer.getLine() + " column " + 
+			lexer.getCol());
+		}
 }
 
 /* constructor taking in File Input */
