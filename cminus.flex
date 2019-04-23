@@ -53,7 +53,9 @@ letter = [A-Za-z]
 digit  = [0-9]
 eol    = \r|\n|\r\n
 ws     = {eol} | [ \t\f]
-comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+//comment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+
+comment = "/*"((("*"[^/])?)|[^*])*"*/"
 
 %%
 "else"			{return Parser.ELSE;}
