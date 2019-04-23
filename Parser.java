@@ -381,7 +381,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 287 "cminus.y"
+//#line 382 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -778,8 +778,26 @@ case 19:
 						}
 					}
 break;
+case 20:
+//#line 181 "cminus.y"
+{
+						int vartype = val_peek(3).ival;
+						String name = val_peek(2).sval;
+						int scope = symtab.getScope();
+						SymTabRec rec = new ArrRec(name,scope,vartype,-1);
+						yyval = new ParserVal(rec);
+						if (symtab.lookup(name))
+						{
+							semerror("Redeclaration of param array "+ name + " in the current scope");
+						}
+						else
+						{
+							symtab.insert(name,rec);
+						}
+					}
+break;
 case 21:
-//#line 183 "cminus.y"
+//#line 198 "cminus.y"
 {
 						if(firstTime){
 							firstTime = false;
@@ -790,12 +808,110 @@ case 21:
 					}
 break;
 case 22:
-//#line 192 "cminus.y"
+//#line 207 "cminus.y"
 {
 						symtab.exitScope();
 					}
 break;
-//#line 753 "Parser.java"
+case 37:
+//#line 236 "cminus.y"
+{
+						String name = val_peek(3).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared variable" + name + "in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a variable in the current scope");
+						}
+						else if(rec.type != val_peek(1).ival){
+							semerror("Type mismatch of variable " + name + ". Expected " + rec.type);
+						}
+
+					}
+break;
+case 38:
+//#line 253 "cminus.y"
+{
+						String name = val_peek(6).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared array" + name + "in the current scope");
+						}
+						else if(!rec.isArr())
+						{
+							semerror("Name " + name + " is not an array in the current scope");
+						}
+					}
+break;
+case 42:
+//#line 277 "cminus.y"
+{
+						String name = val_peek(5).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared variable" + name + " in input statement in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a variable in the input statement in the current scope");
+						}
+						else
+						{
+							usesRead = true;
+						}
+					}
+break;
+case 62:
+//#line 329 "cminus.y"
+{
+						String name = val_peek(0).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared factor variable " + name + "in the current scope");
+						}
+						else if(!rec.isVar())
+						{
+							semerror("Name " + name + " is not a factor variable in the current scope");
+						}
+					}
+break;
+case 63:
+//#line 342 "cminus.y"
+{
+						String name = val_peek(3).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared factor array" + name + "in the current scope");
+						}
+						else if(!rec.isArr())
+						{
+							semerror("Name " + name + " is not a factor array in the current scope");
+						}
+					}
+break;
+case 66:
+//#line 359 "cminus.y"
+{
+						String name = val_peek(3).sval;
+						SymTabRec rec = symtab.get(name);
+						if (rec == null)
+						{
+							semerror("Undeclared function" + name + "in the current scope");
+						}
+						else if(!rec.isFun())
+						{
+							semerror("Name " + name + " is not a function in the current scope");
+						}
+					}
+break;
+//#line 869 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

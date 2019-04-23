@@ -44,7 +44,7 @@ public class FunRec extends SymTabRec
 
 	public String toString()
 	{
-		return "kind: function " + super.toString() + "\n\nparams: "
+		return "kind: function " + super.toString() + "\tparams: "
 			+ getNumParams() + "\n";
 	}
 
