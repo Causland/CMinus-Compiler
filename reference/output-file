@@ -1,0 +1,33 @@
+.source stdin
+.class  synchronized Main
+.super  java/lang/Object
+
+.field static x I
+.field static a [I
+; >> FUNCTION main <<
+.method public static main([Ljava/lang/String;)V
+.throws java/io/IOException
+.limit stack 32
+.limit locals 32
+return
+.end method
+
+; >> CONSTRUCTOR <<
+.method <init>()V
+.limit stack 1
+.limit locals 1
+aload_0
+invokenonvirtual java/lang/Object/<init>()V
+return
+.end method
+
+; >> CLASS INIT FOR GLOBAL ARRAYS <<
+.method static <clinit>()V
+.limit stack 1
+.limit locals 0
+ldc 275
+newarray int
+putstatic Main/a [I
+return
+.end method
+
