@@ -171,10 +171,12 @@ public class GenCode implements ParserTokens
 		{
 			// global var
 			// TODO outputCode for storing to a global (static) integer variable
+			outputCode("huh");
 		}
 		else
 		{
 			// TODO outputCode for storing value of local int variable (need vr.jvmnum)
+			outputCode("istore "+ vr.jvmnum);
 		}
 	}
 
@@ -200,6 +202,7 @@ public class GenCode implements ParserTokens
 	public static void genLoadConst(int i)
 	{
 		// TODO outputCode for loading constant value
+		outputCode("ldc " + i);
 	}
 
 	public static void genXOR()
@@ -298,11 +301,14 @@ public class GenCode implements ParserTokens
 	public static void genBeginPrint()
 	{
 		// TODO outputCode for start of println of a single int value
+		outputCode("getstatic java/lang/System/out Ljava/io/PrintStream");
+
 	}
 
 	public static void genEndPrint()
 	{
 		// TODO outputcode for ending of println (calling println here)
+		outputCode("invokevirtual java/io/PrintStream/println<I>V")
 	}
 
 	// TODO use this to generate code to read a value into a variable

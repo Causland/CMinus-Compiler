@@ -106,16 +106,19 @@ fun_declaration: 	type_specifier ID
 							semerror("Redeclaration of function " + name + " in the current scope");
 						}
 						else if (!seenMain){
+							SymTabRec.setJVMNum(0);
 							// Insert record into symbol table
 							symtab.insert(name,rec);
 
 							if(name.equals("main")){
 								seenMain = true;
+								SymTabRec.setJVMNum(1);
 							}
 						}
 						else{
 							semerror("Function " + name + " cannot be declared after main");
 						}
+						symtab.enterScope();
 					}
 					LPAREN params RPAREN
 					{
@@ -256,6 +259,10 @@ assign_stmt:		ID ASSIGN expression SEMI
 						else if(rec.type != $3.ival){
 							semerror("Type mismatch of variable " + name + ". Expected " + rec.type);
 						}
+						else
+						{
+							GenCode.genStore(rec);
+						}
 
 					}
 					| ID LBRACKET expression RBRACKET ASSIGN expression SEMI
@@ -279,7 +286,14 @@ selection_stmt:		IF LPAREN expression RPAREN statement ELSE statement
 iteration_stmt:		WHILE LPAREN expression RPAREN statement
 			;
 
-print_stmt:			PRINT LPAREN expression RPAREN SEMI
+print_stmt:			PRINT LPAREN 
+					{
+						GenCode.genBeginPrint();
+					}
+					expression RPAREN SEMI
+					{
+						GenCode.genEndPrint();
+					}
 			;
 
 input_stmt:			ID ASSIGN INPUT LPAREN RPAREN SEMI
@@ -297,6 +311,7 @@ input_stmt:			ID ASSIGN INPUT LPAREN RPAREN SEMI
 						else
 						{
 							usesRead = true;
+							GenCode.genRead(rec);
 						}
 					}
 			;
@@ -342,9 +357,17 @@ factor:				LPAREN expression RPAREN
 						{
 							semerror("Undeclared factor variable " + name + "in the current scope");
 						}
-						else if(!rec.isVar())
+						else if(!rec.isVar() && !rec.isArr())
 						{
+							System.out.println(rec);
 							semerror("Name " + name + " is not a factor variable in the current scope");
+						}
+						else
+						{
+							if (rec.isVar())
+								GenCode.genLoadVar(rec);
+							else
+								GenCode.genLoadArrAddr(rec);
 						}
 					}
 					| ID LBRACKET expression RBRACKET
@@ -359,9 +382,14 @@ factor:				LPAREN expression RPAREN
 						{
 							semerror("Name " + name + " is not a factor array in the current scope");
 						}
+
 					}
 					| call
 					| NUM
+					{
+						int num = $1.ival;
+						GenCode.genLoadConst(num);
+					}
 			;
 
 call:				ID LPAREN args RPAREN
