@@ -78,8 +78,10 @@ var_declaration:	type_specifier ID SEMI {
 						{
 						//Symbol table add
 						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
-						symtab.insert(name, rec); 
+						symtab.insert(name, rec);
+						GenCode.genArrInit(rec);
 						}
+
 					}
 			;
 
@@ -277,13 +279,38 @@ assign_stmt:		ID ASSIGN expression SEMI
 						{
 							semerror("Name " + name + " is not an array in the current scope");
 						}
+						else{
+							GenCode.genLoadArrAddr(rec);
+						}
 					}
 			;
 
-selection_stmt:		IF LPAREN expression RPAREN statement ELSE statement
+selection_stmt:		IF LPAREN expression RPAREN;
+					{
+						String s1 = GenCode.getLabel();
+						$$ = new ParserVal(s1);
+						GenCode.genFGoto(s1)
+					}
+	 				statement
+	 				{
+	 					String s2 = GenCode.getLabel();
+	 					$$ = new ParserVal(s2);
+	 					GenCode.genGoto(s2);
+	 				} 
+	 				ELSE
+	 				{
+	 					GenCode.genLabel($5.sval);
+	 				} 
+	 				statement
+	 				{
+	 					GenCode.genLabel($7.sval);
+	 				}
 			;
 
-iteration_stmt:		WHILE LPAREN expression RPAREN statement
+iteration_stmt:		WHILE 
+					{
+						String s1 = GenCode.getLabel();
+					}LPAREN expression RPAREN statement
 			;
 
 print_stmt:			PRINT LPAREN 
@@ -382,7 +409,9 @@ factor:				LPAREN expression RPAREN
 						{
 							semerror("Name " + name + " is not a factor array in the current scope");
 						}
-
+						else{
+							GenCode.genLoadArrAddr(rec);
+						}
 					}
 					| call
 					| NUM

@@ -384,7 +384,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 420 "cminus.y"
+//#line 426 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -666,20 +666,22 @@ case 8:
 						{
 						/*Symbol table add*/
 						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
-						symtab.insert(name, rec); 
+						symtab.insert(name, rec);
+						GenCode.genArrInit(rec);
 						}
+
 					}
 break;
 case 9:
-//#line 86 "cminus.y"
+//#line 88 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 10:
-//#line 87 "cminus.y"
+//#line 89 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 11:
-//#line 91 "cminus.y"
+//#line 93 "cminus.y"
 {
 						
 
@@ -714,7 +716,7 @@ case 11:
 					}
 break;
 case 12:
-//#line 124 "cminus.y"
+//#line 126 "cminus.y"
 {
 						symtab.enterScope();
 
@@ -741,26 +743,26 @@ case 12:
 					}
 break;
 case 13:
-//#line 149 "cminus.y"
+//#line 151 "cminus.y"
 {
 						firstTime = true;
 						GenCode.genFunEnd();
 					}
 break;
 case 14:
-//#line 156 "cminus.y"
+//#line 158 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 15:
-//#line 157 "cminus.y"
+//#line 159 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 16:
-//#line 158 "cminus.y"
+//#line 160 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 17:
-//#line 162 "cminus.y"
+//#line 164 "cminus.y"
 {
 						List<SymTabRec> params = (List<SymTabRec>)val_peek(2).obj;
 						params.add((SymTabRec)val_peek(0).obj);
@@ -769,7 +771,7 @@ case 17:
 					}
 break;
 case 18:
-//#line 169 "cminus.y"
+//#line 171 "cminus.y"
 {
 						List<SymTabRec> params =  new ArrayList<SymTabRec>();
 						params.add((SymTabRec)val_peek(0).obj);
@@ -777,7 +779,7 @@ case 18:
 					}
 break;
 case 19:
-//#line 177 "cminus.y"
+//#line 179 "cminus.y"
 {
 						int vartype = val_peek(1).ival;
 						String name = val_peek(0).sval;
@@ -795,7 +797,7 @@ case 19:
 					}
 break;
 case 20:
-//#line 193 "cminus.y"
+//#line 195 "cminus.y"
 {
 						int vartype = val_peek(3).ival;
 						String name = val_peek(2).sval;
@@ -809,12 +811,11 @@ case 20:
 						else
 						{
 							symtab.insert(name,rec);
-							GenCode.genArrInit(rec);
 						}
 					}
 break;
 case 21:
-//#line 211 "cminus.y"
+//#line 212 "cminus.y"
 {
 						if(firstTime){
 							firstTime = false;
@@ -825,13 +826,13 @@ case 21:
 					}
 break;
 case 22:
-//#line 220 "cminus.y"
+//#line 221 "cminus.y"
 {
 						symtab.exitScope();
 					}
 break;
 case 37:
-//#line 249 "cminus.y"
+//#line 250 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -854,7 +855,7 @@ case 37:
 					}
 break;
 case 38:
-//#line 270 "cminus.y"
+//#line 271 "cminus.y"
 {
 						String name = val_peek(6).sval;
 						SymTabRec rec = symtab.get(name);
@@ -866,22 +867,25 @@ case 38:
 						{
 							semerror("Name " + name + " is not an array in the current scope");
 						}
+						else{
+							GenCode.genLoadArrAddr(rec);
+						}
 					}
 break;
 case 41:
-//#line 291 "cminus.y"
+//#line 295 "cminus.y"
 {
 						GenCode.genBeginPrint();
 					}
 break;
 case 42:
-//#line 295 "cminus.y"
+//#line 299 "cminus.y"
 {
 						GenCode.genEndPrint();
 					}
 break;
 case 43:
-//#line 301 "cminus.y"
+//#line 305 "cminus.y"
 {
 						String name = val_peek(5).sval;
 						SymTabRec rec = symtab.get(name);
@@ -901,7 +905,7 @@ case 43:
 					}
 break;
 case 63:
-//#line 354 "cminus.y"
+//#line 358 "cminus.y"
 {
 						String name = val_peek(0).sval;
 						SymTabRec rec = symtab.get(name);
@@ -924,7 +928,7 @@ case 63:
 					}
 break;
 case 64:
-//#line 375 "cminus.y"
+//#line 379 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -936,18 +940,20 @@ case 64:
 						{
 							semerror("Name " + name + " is not a factor array in the current scope");
 						}
-
+						else{
+							GenCode.genLoadArrAddr(rec);
+						}
 					}
 break;
 case 66:
-//#line 390 "cminus.y"
+//#line 396 "cminus.y"
 {
 						int num = val_peek(0).ival;
 						GenCode.genLoadConst(num);
 					}
 break;
 case 67:
-//#line 397 "cminus.y"
+//#line 403 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -961,7 +967,7 @@ case 67:
 						}
 					}
 break;
-//#line 919 "Parser.java"
+//#line 925 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

@@ -1,4 +1,5 @@
 int w;
+int mainVar;
 
 void testFun(int y, int z[]){
 	int x;
@@ -14,4 +15,8 @@ void testFun(int y, int z[]){
 
 void main(void){
 	testFun();
+	mainVar = 1234;
+	if(mainVar < 3234){
+		mainVar = 23;
+	}
 }

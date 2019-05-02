@@ -3,6 +3,7 @@
 .super  java/lang/Object
 
 .field static w I
+.field static mainVar I
 ; >> FUNCTION testFun <<
 .method static testFun(I[I)V
 .limit stack 32
@@ -32,22 +33,17 @@ return
 .limit stack 32
 .limit locals 32
 invokestatic Main/testFun(I[I)V
-return
-.end method
-
-; >> CONSTRUCTOR <<
-.method <init>()V
-.limit stack 1
-.limit locals 1
-aload_0
-invokenonvirtual java/lang/Object/<init>()V
-return
-.end method
-
-; >> CLASS INIT FOR GLOBAL ARRAYS <<
-.method static <clinit>()V
-.limit stack 1
-.limit locals 0
-return
-.end method
-
+ldc 1234
+putstatic Main/mainVar I
+getstatic Main/mainVar I
+ldc 3234
+if_icmpeq Label1
+iconst_0
+goto Label0
+Label1:
+iconst_1
+Label0:
+ifeq Label2
+ldc 23
+putstatic Main/mainVar I
+goto Label3

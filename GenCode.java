@@ -196,17 +196,16 @@ public class GenCode implements ParserTokens
 		switch (t)
 		{
 			case PLUS:
-				// TODO outputCode for integer add
+				outputCode("iadd");
 				break;
 			case MINUS:
-				// TODO outputCode for integer subtraction
 				outputCode("isub");
 				break;
 			case MULT:
-				// TODO outputCode for integer multiplication
+				outputCode("imul");
 				break;
 			case DIVIDE:
-				// TODO outputCode for integer division
+				outputCode("idiv");
 				break;
 		}
 	}
@@ -255,18 +254,17 @@ public class GenCode implements ParserTokens
 
 	public static void genIneg()
 	{
-		// TODO outputCode for integer negate
+		outputCode("ineg");
 	}
 
 	public static void genFGoto(String lab)
 	{
-		// if false (= 0) then goto
-		// TODO outputcode for ifeq
+		outputCode("ifeq " + lab);
 	}
 
 	public static void genGoto(String lab)
 	{
-		// TODO outputCode for goto
+		outputCode("goto " + lab);
 	}
 
 	public static String getLabel()
