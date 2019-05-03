@@ -79,7 +79,10 @@ var_declaration:	type_specifier ID SEMI {
 						//Symbol table add
 						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
 						symtab.insert(name, rec);
-						GenCode.genArrInit(rec);
+						if (scope == 0)
+							GenCode.genStaticDecl(rec);
+						else
+							GenCode.genArrInit(rec);
 						}
 
 					}
@@ -281,15 +284,16 @@ assign_stmt:		ID ASSIGN expression SEMI
 						}
 						else{
 							GenCode.genLoadArrAddr(rec);
+							GenCode.genIAStore();
 						}
 					}
 			;
 
-selection_stmt:		IF LPAREN expression RPAREN;
+selection_stmt:		IF LPAREN expression RPAREN
 					{
 						String s1 = GenCode.getLabel();
 						$$ = new ParserVal(s1);
-						GenCode.genFGoto(s1)
+						GenCode.genFGoto(s1);
 					}
 	 				statement
 	 				{
@@ -307,10 +311,17 @@ selection_stmt:		IF LPAREN expression RPAREN;
 	 				}
 			;
 
-iteration_stmt:		WHILE 
+iteration_stmt:		WHILE LPAREN expression RPAREN
 					{
-						String s1 = GenCode.getLabel();
-					}LPAREN expression RPAREN statement
+						String s2 = GenCode.getLabel();
+						$$ = new ParserVal(s2);
+						GenCode.genFGoto(s2);
+					} 
+					statement
+					{
+						GenCode.genGoto()
+						GenCode.genLabel($5.sval);
+					}
 			;
 
 print_stmt:			PRINT LPAREN 
@@ -344,10 +355,20 @@ input_stmt:			ID ASSIGN INPUT LPAREN RPAREN SEMI
 			;
 
 return_stmt:		RETURN SEMI
+					{
+						GenCode.genReturn();
+					}
 					| RETURN expression SEMI
+					{
+						GenCode.genIReturn();
+					}
 			;
 
 expression:	  		additive_expression relop additive_expression
+					{
+						int op = $2.ival;
+						GenCode.genRelOper(op);
+					}
 					| additive_expression
 			;
 
@@ -360,6 +381,10 @@ relop:				LTE
 			;
 
 additive_expression:	additive_expression addop term
+						{
+							int op = $2.ival;
+							GenCode.genArithOper(op);
+						}
 						| term
 			;
 
@@ -368,6 +393,10 @@ addop:				PLUS
 			;
 
 term:				term mulop factor
+					{
+						int op = $2.ival;
+						GenCode.genArithOper(op);
+					}
 					| factor
 			;
 
@@ -410,7 +439,7 @@ factor:				LPAREN expression RPAREN
 							semerror("Name " + name + " is not a factor array in the current scope");
 						}
 						else{
-							GenCode.genLoadArrAddr(rec);
+							GenCode.genIALoad();
 						}
 					}
 					| call
@@ -432,6 +461,10 @@ call:				ID LPAREN args RPAREN
 						else if(!rec.isFun())
 						{
 							semerror("Name " + name + " is not a function in the current scope");
+						}
+						else
+						{
+							GenCode.genFunCall(rec);
 						}
 					}
 			;

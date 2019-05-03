@@ -163,21 +163,21 @@ final static short yylhs[] = {                           -1,
     2,    0,    1,    1,    3,    3,    4,    4,    6,    6,
     7,   10,    5,    8,    8,    8,   11,   11,   12,   12,
    13,    9,   14,   14,   15,   15,   16,   16,   16,   16,
-   16,   16,   16,   16,   16,   23,   17,   17,   18,   19,
-   26,   21,   22,   20,   20,   25,   25,   28,   28,   28,
-   28,   28,   28,   27,   27,   29,   29,   30,   30,   31,
-   31,   32,   32,   32,   32,   32,   24,   33,   33,   34,
-   34,
+   16,   16,   16,   16,   16,   23,   17,   17,   26,   27,
+   28,   18,   29,   19,   30,   21,   22,   20,   20,   25,
+   25,   32,   32,   32,   32,   32,   32,   31,   31,   33,
+   33,   34,   34,   35,   35,   36,   36,   36,   36,   36,
+   24,   37,   37,   38,   38,
 };
 final static short yylen[] = {                            2,
     0,    2,    2,    1,    1,    1,    3,    6,    1,    1,
     0,    0,    8,    1,    1,    0,    3,    1,    2,    4,
     0,    5,    2,    0,    2,    0,    1,    1,    1,    1,
-    1,    1,    1,    1,    1,    2,    4,    7,    7,    5,
-    0,    6,    6,    2,    3,    3,    1,    1,    1,    1,
-    1,    1,    1,    3,    1,    1,    1,    3,    1,    1,
-    1,    3,    1,    4,    1,    1,    4,    1,    0,    3,
-    1,
+    1,    1,    1,    1,    1,    2,    4,    7,    0,    0,
+    0,   10,    0,    6,    0,    6,    6,    2,    3,    3,
+    1,    1,    1,    1,    1,    1,    1,    3,    1,    1,
+    1,    3,    1,    1,    1,    3,    1,    4,    1,    1,
+    4,    1,    0,    3,    1,
 };
 final static short yydefred[] = {                         1,
     0,    0,   10,    9,    0,    4,    5,    6,    0,    3,
@@ -185,79 +185,79 @@ final static short yydefred[] = {                         1,
     0,   18,    8,    0,   12,    0,    0,   21,   17,   20,
    13,    0,   24,    0,   23,    0,    0,    0,    0,   35,
    22,    0,    0,    0,    0,   28,   25,   27,   29,   30,
-   31,   32,   33,   34,    0,    0,    0,    0,   41,    0,
-    0,   66,   44,    0,   65,    0,    0,    0,   59,    0,
-   36,    0,    0,   71,    0,    0,    0,    0,    0,    0,
-    0,   45,   56,   57,   49,   50,   48,   51,   52,   53,
-    0,    0,   60,   61,    0,    0,    0,   37,   67,    0,
-    0,    0,    0,    0,   62,    0,    0,   58,    0,    0,
-   70,    0,    0,   40,   64,    0,   43,    0,   42,    0,
-   38,   39,
+   31,   32,   33,   34,    0,    0,    0,    0,   45,    0,
+    0,   70,   48,    0,   69,    0,    0,    0,   63,    0,
+   36,    0,    0,   75,    0,    0,    0,    0,    0,    0,
+    0,   49,   60,   61,   53,   54,   52,   55,   56,   57,
+    0,    0,   64,   65,    0,    0,    0,   37,   71,    0,
+    0,    0,   43,    0,   66,    0,    0,   62,   39,    0,
+   74,    0,    0,    0,   68,    0,   47,    0,   46,   44,
+   40,   38,    0,   41,    0,   42,
 };
 final static short yydgoto[] = {                          1,
     5,    2,    6,    7,    8,    9,   14,   20,   46,   28,
    21,   22,   32,   34,   37,   47,   48,   49,   50,   51,
-   52,   53,   54,   65,   66,   78,   67,   91,   92,   68,
-   95,   69,   75,   76,
+   52,   53,   54,   65,   66,  116,  123,  125,  114,   78,
+   67,   91,   92,   68,   95,   69,   75,   76,
 };
 final static short yysindex[] = {                         0,
-    0, -229,    0,    0, -229,    0,    0,    0, -247,    0,
- -263,    0, -237, -248, -211, -186, -208,    0, -176, -202,
- -174,    0,    0, -161,    0, -229, -159,    0,    0,    0,
-    0, -162,    0, -229,    0, -137, -249, -263, -192,    0,
-    0, -151, -142, -209, -139,    0,    0,    0,    0,    0,
-    0,    0,    0,    0, -138, -219, -207, -207,    0, -207,
- -132,    0,    0, -207,    0, -131, -190, -194,    0, -207,
-    0, -135, -126,    0, -129, -125, -128, -207, -127, -207,
- -124,    0,    0,    0,    0,    0,    0,    0,    0,    0,
- -207, -207,    0,    0, -207, -123, -122,    0,    0, -207,
- -119, -120, -240, -121,    0, -156, -194,    0, -240, -114,
-    0, -207, -113,    0,    0, -130,    0, -111,    0, -240,
-    0,    0,
+    0, -227,    0,    0, -227,    0,    0,    0, -239,    0,
+ -263,    0, -234, -231, -228, -185, -208,    0, -207, -218,
+ -194,    0,    0, -193,    0, -227, -191,    0,    0,    0,
+    0, -189,    0, -227,    0, -136, -249, -263, -220,    0,
+    0, -150, -143, -209, -137,    0,    0,    0,    0,    0,
+    0,    0,    0,    0, -152, -219, -175, -175,    0, -175,
+ -130,    0,    0, -175,    0, -129, -140, -147,    0, -175,
+    0, -133, -124,    0, -141, -123, -142, -175, -127, -175,
+ -125,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+ -175, -175,    0,    0, -175, -122, -121,    0,    0, -175,
+ -118, -119,    0, -126,    0, -155, -147,    0,    0, -114,
+    0, -175, -113, -240,    0, -240,    0, -112,    0,    0,
+    0,    0, -128,    0, -240,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,    0,    0,  148,    0,    0,    0,    0,    0,
- -112,    0,    0,    0,    0, -110,    0, -214,    0,    0,
- -109,    0,    0, -218,    0,    0,    0,    0,    0,    0,
-    0,    0,    0, -250,    0,    0, -117,    0,    0,    0,
+    0,    0,    0,    0,  150,    0,    0,    0,    0,    0,
+ -111,    0,    0,    0,    0, -115,    0, -214,    0,    0,
+ -110,    0,    0, -257,    0,    0,    0,    0,    0,    0,
+    0,    0,    0, -250,    0,    0, -116,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0, -108,    0,    0,    0,
- -175,    0,    0,    0,    0,    0, -257, -158,    0,    0,
-    0,    0,    0,    0,    0, -107,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0, -109,    0,    0,    0,
+ -195,    0,    0,    0,    0,    0, -139, -174,    0,    0,
+    0,    0,    0,    0,    0, -108,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0, -117,    0,    0, -134, -141,    0, -117,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0, -117,
-    0,    0,
+    0,    0,    0,    0,    0, -132, -157,    0,    0,    0,
+    0,    0,    0, -116,    0, -116,    0,    0,    0,    0,
+    0,    0,    0,    0, -116,    0,
 };
 final static short yygindex[] = {                         0,
-    0,    0,  156,  128,    0,  -12,    0,    0,  139,    0,
-    0,  142,    0,    0,    0,  -62,    0,    0,    0,    0,
-    0,    0,    0,  -37,  -55,    0,   78,    0,    0,   79,
-    0,   75,    0,    0,
+    0,    0,  157,  132,    0,  -12,    0,    0,  139,    0,
+    0,  142,    0,    0,    0, -104,    0,    0,    0,    0,
+    0,    0,    0,  -37,  -55,    0,    0,    0,    0,    0,
+   78,    0,    0,   79,    0,   75,    0,    0,
 };
 final static int YYTABLESIZE=171;
 static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                         55,
-   73,   74,   77,   19,   79,   12,   26,   39,   81,   11,
-   13,   47,   47,   19,   96,   47,   39,   47,   26,   40,
-   15,   36,  102,   16,  104,   26,   26,   41,   40,   26,
+   73,   74,   77,   19,   79,   12,   26,   39,   81,  120,
+   13,  121,   19,   19,   96,   19,   39,   11,   26,   40,
+  126,   36,  102,   15,  104,   26,   26,   41,   40,   26,
    42,   26,   43,   26,   44,   26,   45,   61,   62,   42,
-  114,   43,   10,   44,  111,   45,  116,   61,   62,   61,
-   62,   19,   64,    3,   19,    4,  118,  122,   15,   63,
-   23,   72,   64,   17,   64,   55,   93,   94,   83,   84,
-   25,   55,   85,   86,   87,   88,   89,   90,   56,   57,
-   24,   58,   55,   63,   63,   63,   63,   63,   63,   63,
-   63,   63,   63,   63,   63,   26,   18,   63,    4,   63,
-   55,   55,   83,   84,   55,   55,   55,   55,   55,   55,
-   55,   55,   27,   33,   55,   30,   55,   54,   54,   38,
-   59,   54,   54,   54,   54,   54,   54,   54,   54,   60,
-   71,   54,   70,   54,   46,   46,   97,   82,   46,   57,
-   46,   80,   98,   99,  100,  103,  101,    2,  105,  109,
-  110,  112,  113,  115,  117,  119,  120,  121,   21,   11,
-   10,   35,   16,   14,   69,   68,   31,   29,  106,  108,
+   16,   43,   10,   44,  111,   45,   17,   61,   62,   24,
+   56,   57,   64,   58,   25,    3,  118,    4,   15,   63,
+   23,   72,   64,   67,   67,   67,   67,   67,   67,   67,
+   67,   67,   67,   67,   67,   26,   55,   67,   55,   67,
+   27,   61,   62,   30,   59,   59,   33,   55,   59,   59,
+   59,   59,   59,   59,   59,   59,   64,   18,   59,    4,
+   59,   58,   58,   83,   84,   58,   58,   58,   58,   58,
+   58,   58,   58,   93,   94,   58,   71,   58,   83,   84,
+   38,   59,   85,   86,   87,   88,   89,   90,   60,   51,
+   51,   99,  101,   51,   70,   51,   50,   50,   97,   82,
+   50,   57,   50,   80,   98,  103,  100,  105,  115,    2,
+  109,  110,  112,  113,  117,  119,  122,   16,  124,   21,
+   11,   10,   14,   73,   72,   35,   31,   29,  106,  108,
   107,
 };
 }
@@ -265,23 +265,23 @@ static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                         37,
-   56,   57,   58,   16,   60,  269,  257,  257,   64,  257,
-  274,  269,  270,   26,   70,  273,  257,  275,  269,  269,
-  258,   34,   78,  272,   80,  276,  277,  277,  269,  280,
+   56,   57,   58,   16,   60,  269,  257,  257,   64,  114,
+  274,  116,  270,   26,   70,  273,  257,  257,  269,  269,
+  125,   34,   78,  258,   80,  276,  277,  277,  269,  280,
   280,  282,  282,  284,  284,  286,  286,  257,  258,  280,
-  103,  282,  257,  284,  100,  286,  109,  257,  258,  257,
-  258,  270,  272,  283,  273,  285,  112,  120,  273,  269,
-  269,  281,  272,  275,  272,  103,  261,  262,  259,  260,
-  273,  109,  263,  264,  265,  266,  267,  268,  271,  272,
-  257,  274,  120,  259,  260,  261,  262,  263,  264,  265,
-  266,  267,  268,  269,  270,  270,  283,  273,  285,  275,
-  259,  260,  259,  260,  263,  264,  265,  266,  267,  268,
-  269,  270,  274,  276,  273,  275,  275,  259,  260,  257,
-  272,  263,  264,  265,  266,  267,  268,  269,  270,  272,
-  269,  273,  272,  275,  269,  270,  272,  269,  273,  272,
-  275,  274,  269,  273,  270,  273,  275,    0,  273,  273,
-  273,  271,  273,  275,  269,  269,  287,  269,  276,  272,
-    5,   34,  273,  273,  273,  273,   28,   26,   91,   95,
+  272,  282,  257,  284,  100,  286,  275,  257,  258,  257,
+  271,  272,  272,  274,  273,  283,  112,  285,  273,  269,
+  269,  281,  272,  259,  260,  261,  262,  263,  264,  265,
+  266,  267,  268,  269,  270,  270,  114,  273,  116,  275,
+  274,  257,  258,  275,  259,  260,  276,  125,  263,  264,
+  265,  266,  267,  268,  269,  270,  272,  283,  273,  285,
+  275,  259,  260,  259,  260,  263,  264,  265,  266,  267,
+  268,  269,  270,  261,  262,  273,  269,  275,  259,  260,
+  257,  272,  263,  264,  265,  266,  267,  268,  272,  269,
+  270,  273,  275,  273,  272,  275,  269,  270,  272,  269,
+  273,  272,  275,  274,  269,  273,  270,  273,  275,    0,
+  273,  273,  271,  273,  269,  269,  269,  273,  287,  276,
+  272,    5,  273,  273,  273,   34,   28,   26,   91,   95,
    92,
 };
 }
@@ -349,10 +349,14 @@ final static String yyrule[] = {
 "call_stmt : call SEMI",
 "assign_stmt : ID ASSIGN expression SEMI",
 "assign_stmt : ID LBRACKET expression RBRACKET ASSIGN expression SEMI",
-"selection_stmt : IF LPAREN expression RPAREN statement ELSE statement",
-"iteration_stmt : WHILE LPAREN expression RPAREN statement",
 "$$5 :",
-"print_stmt : PRINT LPAREN $$5 expression RPAREN SEMI",
+"$$6 :",
+"$$7 :",
+"selection_stmt : IF LPAREN expression RPAREN $$5 statement $$6 ELSE $$7 statement",
+"$$8 :",
+"iteration_stmt : WHILE LPAREN expression RPAREN $$8 statement",
+"$$9 :",
+"print_stmt : PRINT LPAREN $$9 expression RPAREN SEMI",
 "input_stmt : ID ASSIGN INPUT LPAREN RPAREN SEMI",
 "return_stmt : RETURN SEMI",
 "return_stmt : RETURN expression SEMI",
@@ -384,7 +388,7 @@ final static String yyrule[] = {
 "arg_list : expression",
 };
 
-//#line 426 "cminus.y"
+//#line 480 "cminus.y"
 
 /* reference to the lexer object */
 private static Yylex lexer;
@@ -450,7 +454,7 @@ public static void main (String [] args) throws IOException
 
 */
 
-//#line 413 "Parser.java"
+//#line 417 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -667,21 +671,24 @@ case 8:
 						/*Symbol table add*/
 						SymTabRec rec = new ArrRec(name, scope, vartype, arrayLength);
 						symtab.insert(name, rec);
-						GenCode.genArrInit(rec);
+						if (scope == 0)
+							GenCode.genStaticDecl(rec);
+						else
+							GenCode.genArrInit(rec);
 						}
 
 					}
 break;
 case 9:
-//#line 88 "cminus.y"
+//#line 91 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 10:
-//#line 89 "cminus.y"
+//#line 92 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 11:
-//#line 93 "cminus.y"
+//#line 96 "cminus.y"
 {
 						
 
@@ -716,7 +723,7 @@ case 11:
 					}
 break;
 case 12:
-//#line 126 "cminus.y"
+//#line 129 "cminus.y"
 {
 						symtab.enterScope();
 
@@ -743,26 +750,26 @@ case 12:
 					}
 break;
 case 13:
-//#line 151 "cminus.y"
+//#line 154 "cminus.y"
 {
 						firstTime = true;
 						GenCode.genFunEnd();
 					}
 break;
 case 14:
-//#line 158 "cminus.y"
+//#line 161 "cminus.y"
 { yyval = val_peek(0); }
 break;
 case 15:
-//#line 159 "cminus.y"
+//#line 162 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 16:
-//#line 160 "cminus.y"
+//#line 163 "cminus.y"
 { yyval = new ParserVal(null); }
 break;
 case 17:
-//#line 164 "cminus.y"
+//#line 167 "cminus.y"
 {
 						List<SymTabRec> params = (List<SymTabRec>)val_peek(2).obj;
 						params.add((SymTabRec)val_peek(0).obj);
@@ -771,7 +778,7 @@ case 17:
 					}
 break;
 case 18:
-//#line 171 "cminus.y"
+//#line 174 "cminus.y"
 {
 						List<SymTabRec> params =  new ArrayList<SymTabRec>();
 						params.add((SymTabRec)val_peek(0).obj);
@@ -779,7 +786,7 @@ case 18:
 					}
 break;
 case 19:
-//#line 179 "cminus.y"
+//#line 182 "cminus.y"
 {
 						int vartype = val_peek(1).ival;
 						String name = val_peek(0).sval;
@@ -797,7 +804,7 @@ case 19:
 					}
 break;
 case 20:
-//#line 195 "cminus.y"
+//#line 198 "cminus.y"
 {
 						int vartype = val_peek(3).ival;
 						String name = val_peek(2).sval;
@@ -815,7 +822,7 @@ case 20:
 					}
 break;
 case 21:
-//#line 212 "cminus.y"
+//#line 215 "cminus.y"
 {
 						if(firstTime){
 							firstTime = false;
@@ -826,13 +833,13 @@ case 21:
 					}
 break;
 case 22:
-//#line 221 "cminus.y"
+//#line 224 "cminus.y"
 {
 						symtab.exitScope();
 					}
 break;
 case 37:
-//#line 250 "cminus.y"
+//#line 253 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -855,7 +862,7 @@ case 37:
 					}
 break;
 case 38:
-//#line 271 "cminus.y"
+//#line 274 "cminus.y"
 {
 						String name = val_peek(6).sval;
 						SymTabRec rec = symtab.get(name);
@@ -869,23 +876,66 @@ case 38:
 						}
 						else{
 							GenCode.genLoadArrAddr(rec);
+							GenCode.genIAStore();
 						}
 					}
 break;
+case 39:
+//#line 293 "cminus.y"
+{
+						String s1 = GenCode.getLabel();
+						yyval = new ParserVal(s1);
+						GenCode.genFGoto(s1);
+					}
+break;
+case 40:
+//#line 299 "cminus.y"
+{
+	 					String s2 = GenCode.getLabel();
+	 					yyval = new ParserVal(s2);
+	 					GenCode.genGoto(s2);
+	 				}
+break;
 case 41:
-//#line 295 "cminus.y"
+//#line 305 "cminus.y"
+{
+	 					GenCode.genLabel(val_peek(3).sval);
+	 				}
+break;
+case 42:
+//#line 309 "cminus.y"
+{
+	 					GenCode.genLabel(val_peek(3).sval);
+	 				}
+break;
+case 43:
+//#line 315 "cminus.y"
+{
+						String s2 = GenCode.getLabel();
+						yyval = new ParserVal(s2);
+						GenCode.genFGoto(s2);
+					}
+break;
+case 44:
+//#line 321 "cminus.y"
+{
+						GenCode.genLabel(val_peek(1).sval);
+					}
+break;
+case 45:
+//#line 327 "cminus.y"
 {
 						GenCode.genBeginPrint();
 					}
 break;
-case 42:
-//#line 299 "cminus.y"
+case 46:
+//#line 331 "cminus.y"
 {
 						GenCode.genEndPrint();
 					}
 break;
-case 43:
-//#line 305 "cminus.y"
+case 47:
+//#line 337 "cminus.y"
 {
 						String name = val_peek(5).sval;
 						SymTabRec rec = symtab.get(name);
@@ -904,8 +954,41 @@ case 43:
 						}
 					}
 break;
-case 63:
-//#line 358 "cminus.y"
+case 48:
+//#line 357 "cminus.y"
+{
+						GenCode.genReturn();
+					}
+break;
+case 49:
+//#line 361 "cminus.y"
+{
+						GenCode.genIReturn();
+					}
+break;
+case 50:
+//#line 367 "cminus.y"
+{
+						int op = val_peek(1).ival;
+						GenCode.genRelOper(op);
+					}
+break;
+case 58:
+//#line 383 "cminus.y"
+{
+							int op = val_peek(1).ival;
+							GenCode.genArithOper(op);
+						}
+break;
+case 62:
+//#line 395 "cminus.y"
+{
+						int op = val_peek(1).ival;
+						GenCode.genArithOper(op);
+					}
+break;
+case 67:
+//#line 408 "cminus.y"
 {
 						String name = val_peek(0).sval;
 						SymTabRec rec = symtab.get(name);
@@ -927,8 +1010,8 @@ case 63:
 						}
 					}
 break;
-case 64:
-//#line 379 "cminus.y"
+case 68:
+//#line 429 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -941,19 +1024,19 @@ case 64:
 							semerror("Name " + name + " is not a factor array in the current scope");
 						}
 						else{
-							GenCode.genLoadArrAddr(rec);
+							GenCode.genIALoad();
 						}
 					}
 break;
-case 66:
-//#line 396 "cminus.y"
+case 70:
+//#line 446 "cminus.y"
 {
 						int num = val_peek(0).ival;
 						GenCode.genLoadConst(num);
 					}
 break;
-case 67:
-//#line 403 "cminus.y"
+case 71:
+//#line 453 "cminus.y"
 {
 						String name = val_peek(3).sval;
 						SymTabRec rec = symtab.get(name);
@@ -965,9 +1048,13 @@ case 67:
 						{
 							semerror("Name " + name + " is not a function in the current scope");
 						}
+						else
+						{
+							GenCode.genFunCall(rec);
+						}
 					}
 break;
-//#line 925 "Parser.java"
+//#line 1012 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
